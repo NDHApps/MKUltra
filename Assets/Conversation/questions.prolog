@@ -3,12 +3,19 @@
 %%
 
 % Dispatch on question type
+
+strategy(respond_to_dialog_act(question(Asker, $me, Question, _Tense, _Aspect)),
+	 if((Question = ["Where should I eat?"]),
+	    restaurant_chooser(),
+	    answer_yes_no(Asker, Question))).
+
 strategy(respond_to_dialog_act(question(Asker, $me, Question,
 					_Tense, _Aspect)),
 	 if((Question = Answer:Constraint),
 	    let(lf_main_predicate(Constraint, Core),
 		answer_wh(Asker, Answer, Core, Constraint)),
 	    answer_yes_no(Asker, Question))).
+
 
 %% Yes/no quetsions
 strategy(answer_yes_no(Asker, Q),

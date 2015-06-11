@@ -77,6 +77,10 @@ stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)))) --
 
 :- register_lexical_items(['I', cheap, expensive, 'American', 'Italian', 'Chinese', 'Mexican']).
 
+%stock_phrase(restaurant_chooser(_)) --> ['Where', should, 'I', eat].
+%:- register_lexical_items(['Where', should, 'I', eat]).
+
+
 %
 % Help queries from the player
 %
