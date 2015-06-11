@@ -19,16 +19,13 @@ heard_hearsay(ModalLF) :-
    /hearsay/_/Assertion, Assertion=ModalLF.
 
 % Get all of constraints:
-restaurant_chooser():-
-	all(X, (/hearsay/_/X, X = restaurant_const(_,_)), List),
-	satisfies_const(Y, List),
-	say_string(Y).
-
- satisfies_const(X, []).
- satisfies_const(X, [restaurant_const(X,P)|Tail]):-
-     P,
-     satisfies_const(X,Tail).
-
+% all(X, (/hearsay/_/X, X = restaurant_const(_,_)), List).
+%
+% satisfies_const(X, []).
+% satisfies_const(X, [restaurant_const(X,P)|Tail]):-
+%     P,
+%     satisfies_const(X,Tail).
+%
 % ^^^ THAT'LL CHECK ALL CONSTR AND RETURN A RESTAURANT
 
 strategy(respond_to_dialog_act(question_answer(Speaker,_, LF)),
