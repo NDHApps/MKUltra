@@ -4,12 +4,10 @@
 
 % Dispatch on question type
 
-strategy(respond_to_dialog_act(question(Asker, $me, Question, _Tense, _Aspect)),
-	 if((Question = ["Where should I eat?"]),
-	    restaurant_chooser(),
-	    answer_yes_no(Asker, Question))).
+strategy(respond_to_dialog_act(question(Asker, $me, where_should_i_eat, _Tense, _Aspect)),
+	 restaurant_chooser).
 
-strategy(respond_to_dialog_act(question(Asker, $me, Question,
+default_strategy(respond_to_dialog_act(question(Asker, $me, Question,
 					_Tense, _Aspect)),
 	 if((Question = Answer:Constraint),
 	    let(lf_main_predicate(Constraint, Core),

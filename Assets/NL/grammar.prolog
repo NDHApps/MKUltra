@@ -68,14 +68,33 @@ stock_phrase(command($speaker, $addressee, end_game($addressee, $addressee))) --
 
 :- register_lexical_items([end, game]).
 
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)))) --> ['I', want, something, cheap].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)))) --> ['I', want, something, expensive].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,american(X)))) --> ['I', want, something, 'American'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,italian(X)))) --> ['I', want, something, 'Italian'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,chinese(X)))) --> ['I', want, something, 'Chinese'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)))) --> ['I', want, something, 'Mexican'].
+stock_phrase(assertion($speaker, $addressee,
+		       restaurant_const(X,Predication),
+		       present, simple)) -->
+   ['I', want, something ],
+   cuisine_type(X^Predication).
+
+cuisine_type(X^Predication) -->
+   [Word],
+   { cuisine_predicate(Word, X^Predication) }.
+
+cuisine_predicate(cheap, X^cheap(X)).
+
+%stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)), present, simple)) --> ['I', want, something, cheap].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)), present, simple)) --> ['I', want, something, expensive].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,american(X)), present, simple)) --> ['I', want, something, 'American'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,italian(X)), present, simple)) --> ['I', want, something, 'Italian'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,chinese(X)), present, simple)) --> ['I', want, something, 'Chinese'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)), present, simple)) --> ['I', want, something, 'Mexican'].
+
+stock_phrase(question($speaker, $addressee, where_should_i_eat, present, simple)) -->
+   [where, should, 'I', eat, '?'].
 
 :- register_lexical_items(['I', cheap, expensive, 'American', 'Italian', 'Chinese', 'Mexican']).
+
+%stock_phrase(restaurant_chooser(_)) --> ['Where', should, 'I', eat].
+%:- register_lexical_items(['Where', should, 'I', eat]).
+
 
 %
 % Help queries from the player
