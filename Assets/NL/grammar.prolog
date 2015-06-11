@@ -71,30 +71,79 @@ stock_phrase(command($speaker, $addressee, end_game($addressee, $addressee))) --
 stock_phrase(assertion($speaker, $addressee,
 		       restaurant_const(X,Predication),
 		       present, simple)) -->
-   ['I', want, something ],
+   ['I', want, something],
    cuisine_type(X^Predication).
+
+stock_phrase(assertion($speaker, $addressee,
+		       restaurant_const(X,Predication),
+		       present, simple)) -->
+   ['I', want, someplace],
+   cuisine_type(X^Predication).
+
+stock_phrase(assertion($speaker, $addressee,
+		       restaurant_const(X,Predication),
+		       present, simple)) -->
+   ['I', want, some],
+   cuisine_type_noun(X^Predication).
+
+stock_phrase(assertion($speaker, $addressee,
+		       restaurant_const(X,Predication),
+		       present, simple)) -->
+   ['I', want],
+   cuisine_type_noun(X^Predication).
 
 cuisine_type(X^Predication) -->
    [Word],
    { cuisine_predicate(Word, X^Predication) }.
 
+cuisine_type_noun(X^Predication) -->
+   [Word],
+   { cuisine_predicate_noun(Word, X^Predication) }.
+
 cuisine_predicate(cheap, X^cheap(X)).
 cuisine_predicate(expensive, X^expensive(X)).
 cuisine_predicate('American', X^american(X)).
-cuisine_predicate(american, X^american(X)).
+cuisine_predicate_noun('American', X^american(X)).
+cuisine_predicate('Spanish', X^spanish(X)).
+cuisine_predicate_noun('Spanish', X^spanish(X)).
+cuisine_predicate('Chinese', X^chinese(X)).
+cuisine_predicate_noun('Chinese', X^chinese(X)).
+cuisine_predicate('Thai', X^thai(X)).
+cuisine_predicate_noun('Thai', X^thai(X)).
+cuisine_predicate('Mexican', X^mexican(X)).
+cuisine_predicate_noun('Mexican', X^mexican(X)).
+cuisine_predicate(fast, X^fast_food(X)).
+% cuisine_predicate_noun('fast food', X^fast_food(X)).
+cuisine_predicate(vegan, X^vegan(X)).
+cuisine_predicate_noun(sandwiches, X^sandwiches(X)).
+cuisine_predicate_noun(soup, X^soup(X)).
+cuisine_predicate_noun(salad, X^salad(X)).
+cuisine_predicate_noun(breakfast, X^breakfast(X)).
+cuisine_predicate_noun(brunch, X^brunch(X)).
+cuisine_predicate('Cajun', X^cajun(X)).
+cuisine_predicate_noun('Cajun', X^cajun(X)).
+cuisine_predicate('Southern', X^southern(X)).
+cuisine_predicate_noun('Southern', X^southern(X)).
+cuisine_predicate_noun(tapas, X^tapas(X)).
+cuisine_predicate('Asian', X^asian(X)).
+cuisine_predicate_noun('Asian', X^asian(X)).
+cuisine_predicate('Japanase', X^japanase(X)).
+cuisine_predicate_noun('Japanase', X^japanase(X)).
+cuisine_predicate_noun(pizza, X^pizza(X)).
+cuisine_type('Italian', X^italian(X)).
+cuisine_type_noun('Italian', X^italian(X)).
 
-
-%stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)), present, simple)) --> ['I', want, something, cheap].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)), present, simple)) --> ['I', want, something, expensive].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,american(X)), present, simple)) --> ['I', want, something, 'American'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,italian(X)), present, simple)) --> ['I', want, something, 'Italian'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,chinese(X)), present, simple)) --> ['I', want, something, 'Chinese'].
-stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)), present, simple)) --> ['I', want, something, 'Mexican'].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)), present, simple)) --> ['I', want, something, cheap].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)), present, simple)) --> ['I', want, something, expensive].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,american(X)), present, simple)) --> ['I', want, something, 'American'].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,italian(X)), present, simple)) --> ['I', want, something, 'Italian'].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,chinese(X)), present, simple)) --> ['I', want, something, 'Chinese'].
+% stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)), present, simple)) --> ['I', want, something, 'Mexican'].
 
 stock_phrase(question($speaker, $addressee, where_should_i_eat, present, simple)) -->
    [where, should, 'I', eat, '?'].
 
-:- register_lexical_items(['I', cheap, expensive, 'American', 'Italian', 'Chinese', 'Mexican']).
+% :- register_lexical_items(['I', cheap, expensive, 'American', 'Italian', 'Chinese', 'Mexican']).
 
 %stock_phrase(restaurant_chooser(_)) --> ['Where', should, 'I', eat].
 %:- register_lexical_items(['Where', should, 'I', eat]).
