@@ -53,7 +53,7 @@ stock_phrase(greet($speaker, Who)) -->
    proper_name(Who, singular).
 stock_phrase(greet($speaker, $addressee)) --> ['Hi', there].
 
-:- register_lexical_items(['Hey', 'Hellow', 'Hi']).
+:- register_lexical_items(['Hey', 'Hello', 'Hi']).
 
 stock_phrase(apology($speaker, $addressee)) --> ['Sorry'].
 stock_phrase(excuse_self($speaker, $addressee)) --> ['Excuse', me].
@@ -67,6 +67,15 @@ stock_phrase(parting($speaker, $addressee)) --> [be, seeing, you].
 stock_phrase(command($speaker, $addressee, end_game($addressee, $addressee))) --> [ end, game ].
 
 :- register_lexical_items([end, game]).
+
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)))) --> ['I', want, something, cheap].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)))) --> ['I', want, something, expensive].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,american(X)))) --> ['I', want, something, 'American'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,italian(X)))) --> ['I', want, something, 'Italian'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,chinese(X)))) --> ['I', want, something, 'Chinese'].
+stock_phrase(assertion($speaker, $addressee, restaurant_const(X,mexican(X)))) --> ['I', want, something, 'Mexican'].
+
+:- register_lexical_items(['I', cheap, expensive, 'American', 'Italian', 'Chinese', 'Mexican']).
 
 %
 % Help queries from the player
