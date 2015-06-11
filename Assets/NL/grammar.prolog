@@ -79,6 +79,10 @@ cuisine_type(X^Predication) -->
    { cuisine_predicate(Word, X^Predication) }.
 
 cuisine_predicate(cheap, X^cheap(X)).
+cuisine_predicate(expensive, X^expensive(X)).
+cuisine_predicate('American', X^american(X)).
+cuisine_predicate(american, X^american(X)).
+
 
 %stock_phrase(assertion($speaker, $addressee, restaurant_const(X,cheap(X)), present, simple)) --> ['I', want, something, cheap].
 stock_phrase(assertion($speaker, $addressee, restaurant_const(X,expensive(X)), present, simple)) --> ['I', want, something, expensive].
