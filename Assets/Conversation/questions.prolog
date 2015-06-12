@@ -6,7 +6,7 @@
 
 % strategy(respond_to_dialog_act(question(_Asker, $me, where_should_i_eat, _Tense, _Aspect)), restaurant_chooser).
 
-default_strategy(respond_to_dialog_act(question(Asker, $me, Question,
+strategy(respond_to_dialog_act(question(Asker, $me, Question,
 					_Tense, _Aspect)),
 	 if((Question = Answer:Constraint),
 	    let(lf_main_predicate(Constraint, Core),
@@ -90,12 +90,14 @@ default_strategy(enumerate_answers(Asker, Answer, Core, Constraint),
 connective_for_answer((can(_), _), "or") :- !.
 connective_for_answer(_, "and").
 
+
+% Changed "nobody" to "There are no restaurants that meet your criteria" for the purposed of this project
 strategy(answer_with_list([ ], _, Var, Constraint),
 	 say_string(S)) :-
    !,
    begin(variable_type_given_constraint(Var, Constraint, Kind)),
          ( kind_of(Kind, actor) ->
-	      S="Nobody"
+	      S="There are no restaurants that meet your criteria"
 	      ;
 	      S="Nothing" ).
 

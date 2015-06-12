@@ -71,54 +71,6 @@ stock_phrase(command($speaker, $addressee, end_game($addressee, $addressee))) --
 stock_phrase(assertion($speaker, $addressee,
 		       restaurant_const(X,Predication),
 		       present, simple)) -->
-   ['I', want, a],
-   rating_number(X^Predication), [star, restaurant].
-
-stock_phrase(assertion($speaker, $addressee,
-		       restaurant_const(X,Predication),
-		       present, simple)) -->
-   ['I', want, someplace, rated],
-   rating_number(X^Predication), [stars, or, better].
-
-stock_phrase(assertion($speaker, $addressee,
-		       restaurant_const(X,Predication),
-		       present, simple)) -->
-   ['I', want, someplace, rated],
-   rating_number(X^Predication), [stars, or, higher].
-
-stock_phrase(assertion($speaker, $addressee,
-		       restaurant_const(X,Predication),
-		       present, simple)) -->
-   ['I', want, something, rated],
-   rating_number(X^Predication), [stars, or, better].
-
-stock_phrase(assertion($speaker, $addressee,
-		       restaurant_const(X,Predication),
-		       present, simple)) -->
-   ['I', want, something, rated],
-   rating_number(X^Predication), [stars, or, higher].
-
-rating_number(X^Predication) -->
-   [Number],
-   { rating_predicate(Number, X^Predication) }.
-
-% rating_predicate('1', X^one(X)).
-% rating_predicate('1.5', X^one_five(X)).
-% rating_predicate('2', X^two(X)).
-rating_predicate('2.5', X^two_five(X)).
-rating_predicate('3', X^three(X)).
-rating_predicate(three, X^three(X)).
-rating_predicate('3.5', X^three_five(X)).
-rating_predicate('4', X^four(X)).
-rating_predicate(four, X^four(X)).
-rating_predicate('4.5', X^four_five(X)).
-% rating_predicate('5', X^five(X)).
-
-:- register_lexical_items(['I', something, someplace, star, stars, restaurant, '2.5', '3', three, '3.5', '4', four, '4.5', or, better, higher]).
-
-stock_phrase(assertion($speaker, $addressee,
-		       restaurant_const(X,Predication),
-		       present, simple)) -->
    ['I', want, something],
    cuisine_type(X^Predication).
 
@@ -190,7 +142,54 @@ cuisine_predicate_noun(pizza, X^pizza(X)).
 cuisine_predicate('Italian', X^italian(X)).
 cuisine_predicate_noun('Italian', X^italian(X)).
 
-:- register_lexical_items([cheap, expensive, some, 'American', 'Chinese', 'Thai', 'Mexican', fast, food, vegan, vegetarian, sandwiches, soup, salad, breakfast, brunch, 'Cajun', southern, tapas, 'Spanish', 'Middle', 'Eastern', 'Asian', sushi, 'Japanese', pizza, 'Italian']).
+:- register_lexical_items(['I', something, someplace, cheap, expensive, some, 'American', 'Chinese', 'Thai', 'Mexican', fast, food, vegan, vegetarian, sandwiches, soup, salad, breakfast, brunch, 'Cajun', southern, tapas, 'Spanish', 'Middle', 'Eastern', 'Asian', sushi, 'Japanese', pizza, 'Italian']).
+
+stock_phrase(assertion($speaker, $addressee,
+restaurant_const(X,Predication),
+present, simple)) -->
+['I', want, a],
+rating_number(X^Predication), [star, restaurant].
+
+stock_phrase(assertion($speaker, $addressee,
+restaurant_const(X,Predication),
+present, simple)) -->
+['I', want, someplace, rated],
+rating_number(X^Predication), [stars, or, better].
+
+stock_phrase(assertion($speaker, $addressee,
+restaurant_const(X,Predication),
+present, simple)) -->
+['I', want, someplace, rated],
+rating_number(X^Predication), [stars, or, higher].
+
+stock_phrase(assertion($speaker, $addressee,
+restaurant_const(X,Predication),
+present, simple)) -->
+['I', want, something, rated],
+rating_number(X^Predication), [stars, or, better].
+
+stock_phrase(assertion($speaker, $addressee,
+restaurant_const(X,Predication),
+present, simple)) -->
+['I', want, something, rated],
+rating_number(X^Predication), [stars, or, higher].
+
+rating_number(X^Predication) -->
+[Number],
+{ rating_predicate(Number, X^Predication) }.
+
+rating_predicate(one, X^one(X)).
+rating_predicate('1', X^one(X)).
+rating_predicate(two, X^two(X)).
+rating_predicate('2', X^two(X)).
+rating_predicate(three, X^three(X)).
+rating_predicate('3', X^three(X)).
+rating_predicate(four, X^four(X)).
+rating_predicate('4', X^four(X)).
+rating_predicate(five, X^five(X)).
+rating_predicate('5', X^five(X)).
+
+:- register_lexical_items([star, stars, restaurant, one, '1', two, '2', three, '3', four, '4', five, '5', or, better, higher]).
 
 stock_phrase(question($speaker, $addressee, X:i_should_eat(X), present, simple)) -->
    [where, should, 'I', eat, '?'].
@@ -259,6 +258,8 @@ discourse_fragments([F | Fs]) -->
    discourse_fragment(F),
    discourse_fragments(Fs).
 
+discourse_fragment(question_answer(i_should_eat(X))) -->
+   {!}, [you, could, try, X].
 discourse_fragment(question_answer(X)) -->
    {!}, sentence(X, indicative, affirmative, present, simple).
 discourse_fragment(s(X)) -->

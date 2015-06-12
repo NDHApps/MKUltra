@@ -91,23 +91,23 @@ pizza(X) :- italian(X).
 
 two_five(X) :-
    property_value(X, rating, Y),
-   number(Y) >= 2.5.
+   Y >= 2.5.
 
 three(X) :-
    property_value(X, rating, Y),
-   number(Y) >= 3.
+   Y >= 3.
 
 three_five(X) :-
    property_value(X, rating, Y),
-   number(Y) >= 3.5.
+   Y >= 3.5.
 
 four(X) :-
    property_value(X, rating, Y),
-   number(Y) >= 4.
+   Y >= 4.
 
 four_five(X) :-
    property_value(X, rating, Y),
-   number(Y) >= 4.5.
+   Y >= 4.5.
 
 :- external restaurant_const/2.
 satisfies_const(_X, []).
