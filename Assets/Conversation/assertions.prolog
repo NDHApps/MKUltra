@@ -74,10 +74,9 @@ chinese(X) :- serves(X, chinese).
 
 thai(X) :- serves(X, thai).
 
-sushi(X) :- serves(X, sushi).
-
 japanese(X) :- serves(X, japanese).
-japanese(X) :- sushi(X).
+
+sushi(X) :- serves(X, sushi).
 sushi(X) :- japanese(X).
 
 asian(X) :- serves(X, asian).
@@ -85,10 +84,9 @@ asian(X) :- chinese(X).
 asian(X) :- thai(X).
 asian(X) :- japanese(X).
 
-pizza(X) :- serves(X, pizza).
-
 italian(X) :- serves(X, italian).
-italian(X) :- pizza(X).
+
+pizza(X) :- serves(X, pizza).
 pizza(X) :- italian(X).
 
 two_five(X) :-
