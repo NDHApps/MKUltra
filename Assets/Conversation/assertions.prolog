@@ -22,10 +22,12 @@ strategy(respond_to_assertion(Speaker, restaurant_const(X,Y), _),
 heard_hearsay(ModalLF) :-
    /hearsay/_/Assertion, Assertion=ModalLF.
 
-:- external i_should_eat/1, cheap/1, expensive/1, american/1, chinese/1, thai/1, mexican/1, fast_food/1, vegan/1, vegetarian/1, sandwiches/1, soup/1, salad/1, breakfast/1, brunch/1, cajun/1, southern/1, tapas/1, spanish/1, middle_eastern/1, asian/1, sushi/1, japanese/1, pizza/1, italian/1, two_five/1, three/1, three_five/1, four/1, four_five/1, restaurant_const/2.
+:- external i_should_eat/1, cheap/1, expensive/1, american/1, chinese/1, thai/1, mexican/1, fast_food/1, vegan/1, vegetarian/1, sandwiches/1, soup/1, salad/1, breakfast/1, brunch/1, cajun/1, southern/1, tapas/1, spanish/1, middle_eastern/1, asian/1, sushi/1, japanese/1, pizza/1, italian/1, one/1, two/1, three/1, four/1, five/1, restaurant_const/2.
 
 % Get all of constraints:
+
 i_should_eat(Y) :-
+   assert(/hearsay/player/restaurant_const(X,one(X))),
    all(X,
        (/hearsay/_/X, X = restaurant_const(_,_)),
        List),
@@ -89,25 +91,25 @@ italian(X) :- serves(X, italian).
 pizza(X) :- serves(X, pizza).
 pizza(X) :- italian(X).
 
-two_five(X) :-
+one(X) :-
    property_value(X, rating, Y),
-   Y >= 2.5.
+   Y >= 1.
+
+two(X) :-
+   property_value(X, rating, Y),
+   Y >= 2.
 
 three(X) :-
    property_value(X, rating, Y),
    Y >= 3.
 
-three_five(X) :-
-   property_value(X, rating, Y),
-   Y >= 3.5.
-
 four(X) :-
    property_value(X, rating, Y),
    Y >= 4.
 
-four_five(X) :-
+five(X) :-
    property_value(X, rating, Y),
-   Y >= 4.5.
+   Y >= 5.
 
 :- external restaurant_const/2.
 satisfies_const(_X, []).
