@@ -4,8 +4,7 @@
 
 % Dispatch on question type
 
-strategy(respond_to_dialog_act(question(Asker, $me, where_should_i_eat, _Tense, _Aspect)),
-	 restaurant_chooser).
+% strategy(respond_to_dialog_act(question(_Asker, $me, where_should_i_eat, _Tense, _Aspect)), restaurant_chooser).
 
 default_strategy(respond_to_dialog_act(question(Asker, $me, Question,
 					_Tense, _Aspect)),

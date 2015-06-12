@@ -23,12 +23,91 @@ heard_hearsay(ModalLF) :-
    /hearsay/_/Assertion, Assertion=ModalLF.
 
 % Get all of constraints:
-strategy(restaurant_chooser,
-	 say_string(Y)) :-
+i_should_eat(Y) :-
    all(X,
        (/hearsay/_/X, X = restaurant_const(_,_)),
        List),
    satisfies_const(Y, List).
+
+cheap(X) :-
+   property_value(X, price, "cheap").
+
+expensive(X) :-
+   property_value(X, price, "expensive").
+
+serves(X, Y) :-
+   related(X, serves, Y).
+
+american(X) :- serves(X, american).
+
+mexican(X) :- serves(X, mexican).
+
+fast_food(X) :- serves(X, fast_food).
+
+vegan(X) :- serves(X, vegan).
+
+vegetarian(X) :- serves(X, vegetarian).
+
+sandwiches(X) :- serves(X, sandwiches).
+
+soup(X) :- serves(X, soup).
+
+salad(X) :- serves(X, salad).
+
+breakfast(X) :- serves(X, breakfast).
+
+brunch(X) :- serves(X, brunch).
+
+cajun(X) :- serves(X, cajun).
+
+southern(X) :- serves(X, southern).
+
+tapas(X) :- serves(X, tapas).
+
+spanish(X) :- serves(X, spanish).
+
+middle_eastern(X) :- serves(X, middle_eastern).
+
+chinese(X) :- serves(X, chinese).
+
+thai(X) :- serves(X, thai).
+
+sushi(X) :- serves(X, sushi).
+
+japanese(X) :- serves(X, japanese).
+japanese(X) :- sushi(X).
+sushi(X) :- japanese(X).
+
+asian(X) :- serves(X, asian).
+asian(X) :- chinese(X).
+asian(X) :- thai(X).
+asian(X) :- japanese(X).
+
+pizza(X) :- serves(X, pizza).
+
+italian(X) :- serves(X, italian).
+italian(X) :- pizza(X).
+pizza(X) :- italian(X).
+
+two_five(X) :-
+   property_value(X, rating, Y),
+   number(Y) >= 2.5.
+
+three(X) :-
+   property_value(X, rating, Y),
+   number(Y) >= 3.
+
+three_five(X) :-
+   property_value(X, rating, Y),
+   number(Y) >= 3.5.
+
+four(X) :-
+   property_value(X, rating, Y),
+   number(Y) >= 4.
+
+four_five(X) :-
+   property_value(X, rating, Y),
+   number(Y) >= 4.5.
 
 :- external restaurant_const/2.
 satisfies_const(_X, []).
